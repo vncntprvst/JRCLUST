@@ -39,11 +39,6 @@ function plotFigProj(S0)
 
     plotStyle = {'Marker', 'o', 'MarkerSize', 1, 'LineStyle', 'none'};
 
-    % don't try to display kilosort features if this isn't a kilosort session!
-    if strcmpi(P.displayFeature, 'kilosort') && ~getOr(P, 'fImportKilosort', 0)
-        P.displayFeature = 'vpp';
-    end
-
     switch lower(P.displayFeature)
         case {'vpp', 'vmin', 'vmax'}
             xLabel = 'Site # (%0.0f \\muV; upper: V_{min}; lower: V_{max})';

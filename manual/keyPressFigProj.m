@@ -66,7 +66,7 @@ function keyPressFigProj(hFig, event)
 
         case 'f'
             if getOr(P, 'fImportKilosort', 0)
-                if strcmpi(P.displayFeature, 'vpp')
+                if strcmpi(P.displayFeature, 'vpp') && ~isempty(S0.S_clu.rez.cProjPC)
                     P.displayFeature = 'kilosort';
                 else
                     P.displayFeature = 'vpp';

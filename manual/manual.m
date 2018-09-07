@@ -24,8 +24,15 @@ function manual(P, debugMode)
         set(0, 'UserData', S0);
     end
 
-    if getOr(P, 'fImportKilosort', 0)
-        S0.pcPair = [1 2];
+    if strcmpi(P.displayFeature, 'kilosort')
+        % don't try to display kilosort features if we don't have the data!
+        if ~getOr(P, 'fImportKilosort', 0) || isempty(S0.S_clu.rez.cProjPC)
+            P.displayFeature = 'vpp';
+            S0.P = P;
+        else
+            S0.pcPair = [1 2];
+        end
+
         set(0, 'UserData', S0);
     end
 
@@ -65,7 +72,7 @@ function manual(P, debugMode)
     % Set fields
     S0 = mergeStructs(S0, ...
         struct('primarySelectedCluster', 1, 'secondarySelectedCluster', [], 'hCopy', [], ...
-            'hPaste', [], 'nSites', numel(P.chanMap)));
+        'hPaste', [], 'nSites', numel(P.chanMap)));
     set(0, 'UserData', S0);
 
     % hFigRD
