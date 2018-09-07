@@ -89,7 +89,7 @@ function keyPressFigTime(hObject, event, S0)
 
 
         case 'f' % feature display instead of amplitude display
-            if getOr(P, 'fImportKilosort')
+            if getOr(P, 'fImportKilosort', 0)
                 if strcmpi(P.displayFeature, 'vpp')
                     P.displayFeature = 'kilosort';
                 else
@@ -103,7 +103,7 @@ function keyPressFigTime(hObject, event, S0)
                 % also update FigProj
                 plotFigProj(S0);
             else
-                disp('keyPressFigProj: ''f'': not implemented yet');
+                disp('keyPressFigTime: ''f'': not implemented yet');
             end
 
         case 'c' % compare pca across channels
