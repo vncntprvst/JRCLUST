@@ -3,6 +3,7 @@
 
 # sample binary files and JRC output
 sample*.bin
+sample*.csv
 sample*.jrc
 sample*.mat
 sample*.png
