@@ -57,6 +57,20 @@ function S = read_whisper_meta_(vcFname)
             catch
                 S.S_imec3 = [];
             end
+        elseif isfield(S, 'oeSampRate') 
+            % Open Ephys
+            S.nChans = S.nSavedChans;
+            S.sRateHz = S.oeSampRate;
+            S.rangeMax = S.oeAiRangeMax;
+            S.rangeMin = S.oeAiRangeMin;
+%             S.ADC_bits stays as 16 bit 
+            vnOERO = textscan(S.oeroTbl, '%d', 'Delimiter', ',');
+            vnOERO = vnOERO{1};
+            S.auxGain = double(vnOERO(1)); %hard code for now;
+            S.auxGain_lfp = double(vnOERO(2)); %hard code for now;
+%             S.vcProbe = no need for that
+%             S.nSites = vnOERO(4);
+%             S.viSites = %sites saved
         elseif isfield(S, 'sample_rate') %nick steinmetz
             S.nChans = S.n_channels_dat;
             S.sRateHz = S.sample_rate;
