@@ -25,6 +25,12 @@ cfgData.siteLoc = channelPositions;
 cfgData.shankMap = ones(size(channelMap), 'like', channelMap); % this can change with a prm file
 cfgData.rawRecordings = {params.dat_path};
 
+% check for existence of .prm file. if exists use it as a template.
+[a,b,~] = fileparts(params.dat_path);
+prm_path = [a,filesep,b,'.prm'];
+if exist(prm_path,'file')
+    cfgData.template_file = prm_path;
+end
 hCfg = jrclust.Config(cfgData);
 
 % load spike data
@@ -200,7 +206,14 @@ end
 
 % set some specific params
 hCfg.nPeaksFeatures = 1; % don't find secondary peaks
-hCfg.figList = setdiff(hCfg.figList, 'FigRD'); % don't show rho-delta plot
+% remove FigRD
+if ismember(hCfg.figList,'FigRD')
+    keepFigIdx = ~ismember(hCfg.figList,'FigRD');
+    hCfg.figList = hCfg.figList(keepFigIdx);
+    if ~isempty(hCfg.figPos)
+        hCfg.figPos = hCfg.figPos(keepFigIdx);
+    end
+end
 hCfg.corrRange = [0.75 1];
 
 %%% detect and extract spikes/features
