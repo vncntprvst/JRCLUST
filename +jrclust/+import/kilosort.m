@@ -207,7 +207,7 @@ end
 % set some specific params
 hCfg.nPeaksFeatures = 1; % don't find secondary peaks
 % remove FigRD
-if ismember(hCfg.figList,'FigRD')
+if any(ismember(hCfg.figList,'FigRD'))
     keepFigIdx = ~ismember(hCfg.figList,'FigRD');
     hCfg.figList = hCfg.figList(keepFigIdx);
     if ~isempty(hCfg.figPos)
